@@ -2,10 +2,13 @@
 GET http://localhost:8080/movies
 
 ### GET all movies live
-GET https://cse341-movies-20er.onrender.com
+GET https://cse341-movies-20er.onrender.com/movies
 
 ### GET movie by ID
-GET http://localhost:8080/tvshows/69bb19a184a8f98b8f717ae4
+GET http://localhost:8080/movies/REPLACE_WITH_ID
+
+### GET movie by ID live
+GET https://cse341-movies-20er.onrender.com/movies/REPLACE_WITH_ID
 
 ### POST create movie
 POST http://localhost:8080/movies
@@ -23,7 +26,7 @@ Content-Type: application/json
 }
 
 ### PUT update movie
-PUT http://localhost:8080/movies/69bb184584a8f98b8f717add
+PUT http://localhost:8080/movies/REPLACE_WITH_ID
 Content-Type: application/json
 
 {
@@ -38,13 +41,19 @@ Content-Type: application/json
 }
 
 ### DELETE movie
-DELETE http://localhost:8080/movies/69bb184584a8f98b8f717add
+DELETE http://localhost:8080/movies/REPLACE_WITH_ID
 
 ### GET all tvshows
 GET http://localhost:8080/tvshows
 
 ### GET all tvshows live
-GET https://cse341-movies.onrender.com/tvshows
+GET https://cse341-movies-20er.onrender.com/tvshows
+
+### GET tvshow by ID
+GET http://localhost:8080/tvshows/REPLACE_WITH_ID
+
+### GET tvshow by ID live
+GET https://cse341-movies-20er.onrender.com/tvshows/REPLACE_WITH_ID
 
 ### POST create tvshow
 POST http://localhost:8080/tvshows
@@ -62,7 +71,7 @@ Content-Type: application/json
 }
 
 ### PUT update tvshow
-PUT http://localhost:8080/tvshows/69bb19a184a8f98b8f717ae4
+PUT http://localhost:8080/tvshows/REPLACE_WITH_ID
 Content-Type: application/json
 
 {
@@ -77,4 +86,4 @@ Content-Type: application/json
 }
 
 ### DELETE tvshow
-DELETE http://localhost:8080/tvshows/69bb19a184a8f98b8f717ae4
+DELETE http://localhost:8080/tvshows/REPLACE_WITH_ID

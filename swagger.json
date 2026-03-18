@@ -7,7 +7,7 @@
     },
     "servers": [
       {
-        "url": "https://cse341-movies.onrender.com",
+        "url": "https://cse341-movies-20er.onrender.com",
         "description": "Production server"
       },
       {
