@@ -1,1 +1,234 @@
-{}
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Movies & TV Shows API",
+      "description": "A RESTful API for managing movies and TV shows",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://cse341-movies.onrender.com",
+        "description": "Production server"
+      },
+      {
+        "url": "http://localhost:8080",
+        "description": "Local server"
+      }
+    ],
+    "paths": {
+      "/movies": {
+        "get": {
+          "summary": "Get all movies",
+          "tags": ["Movies"],
+          "responses": {
+            "200": { "description": "List of all movies" },
+            "500": { "description": "Server error" }
+          }
+        },
+        "post": {
+          "summary": "Create a new movie",
+          "tags": ["Movies"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Movie" }
+              }
+            }
+          },
+          "responses": {
+            "201": { "description": "Movie created successfully" },
+            "400": { "description": "Validation error" },
+            "500": { "description": "Server error" }
+          }
+        }
+      },
+      "/movies/{id}": {
+        "get": {
+          "summary": "Get a movie by ID",
+          "tags": ["Movies"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Movie found" },
+            "400": { "description": "Invalid ID format" },
+            "404": { "description": "Movie not found" },
+            "500": { "description": "Server error" }
+          }
+        },
+        "put": {
+          "summary": "Update a movie by ID",
+          "tags": ["Movies"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Movie" }
+              }
+            }
+          },
+          "responses": {
+            "204": { "description": "Movie updated successfully" },
+            "400": { "description": "Validation error or invalid ID" },
+            "404": { "description": "Movie not found" },
+            "500": { "description": "Server error" }
+          }
+        },
+        "delete": {
+          "summary": "Delete a movie by ID",
+          "tags": ["Movies"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Movie deleted successfully" },
+            "400": { "description": "Invalid ID format" },
+            "404": { "description": "Movie not found" },
+            "500": { "description": "Server error" }
+          }
+        }
+      },
+      "/tvshows": {
+        "get": {
+          "summary": "Get all TV shows",
+          "tags": ["TV Shows"],
+          "responses": {
+            "200": { "description": "List of all TV shows" },
+            "500": { "description": "Server error" }
+          }
+        },
+        "post": {
+          "summary": "Create a new TV show",
+          "tags": ["TV Shows"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Tvshow" }
+              }
+            }
+          },
+          "responses": {
+            "201": { "description": "TV show created successfully" },
+            "400": { "description": "Validation error" },
+            "500": { "description": "Server error" }
+          }
+        }
+      },
+      "/tvshows/{id}": {
+        "get": {
+          "summary": "Get a TV show by ID",
+          "tags": ["TV Shows"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "TV show found" },
+            "400": { "description": "Invalid ID format" },
+            "404": { "description": "TV show not found" },
+            "500": { "description": "Server error" }
+          }
+        },
+        "put": {
+          "summary": "Update a TV show by ID",
+          "tags": ["TV Shows"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Tvshow" }
+              }
+            }
+          },
+          "responses": {
+            "204": { "description": "TV show updated successfully" },
+            "400": { "description": "Validation error or invalid ID" },
+            "404": { "description": "TV show not found" },
+            "500": { "description": "Server error" }
+          }
+        },
+        "delete": {
+          "summary": "Delete a TV show by ID",
+          "tags": ["TV Shows"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "TV show deleted successfully" },
+            "400": { "description": "Invalid ID format" },
+            "404": { "description": "TV show not found" },
+            "500": { "description": "Server error" }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Movie": {
+          "type": "object",
+          "required": ["title", "genre", "releaseYear", "director", "rating", "duration", "language", "synopsis"],
+          "properties": {
+            "title": { "type": "string", "example": "Inception" },
+            "genre": { "type": "string", "example": "Sci-Fi" },
+            "releaseYear": { "type": "integer", "example": 2010 },
+            "director": { "type": "string", "example": "Christopher Nolan" },
+            "rating": { "type": "number", "minimum": 1, "maximum": 10, "example": 9 },
+            "duration": { "type": "integer", "example": 148 },
+            "language": { "type": "string", "example": "English" },
+            "synopsis": { "type": "string", "example": "A thief who steals corporate secrets through dream-sharing technology." }
+          }
+        },
+        "Tvshow": {
+          "type": "object",
+          "required": ["title", "genre", "seasons", "episodes", "status", "network", "rating", "language"],
+          "properties": {
+            "title": { "type": "string", "example": "Breaking Bad" },
+            "genre": { "type": "string", "example": "Crime Drama" },
+            "seasons": { "type": "integer", "example": 5 },
+            "episodes": { "type": "integer", "example": 62 },
+            "status": { "type": "string", "enum": ["Ongoing", "Ended"], "example": "Ended" },
+            "network": { "type": "string", "example": "AMC" },
+            "rating": { "type": "number", "minimum": 1, "maximum": 10, "example": 10 },
+            "language": { "type": "string", "example": "English" }
+          }
+        }
+      }
+    }
+  }
