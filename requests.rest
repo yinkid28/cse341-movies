@@ -1,6 +1,9 @@
 ### GET all movies
 GET http://localhost:8080/movies
 
+### GET all movies live
+GET https://cse341-movies-20er.onrender.com
+
 ### GET movie by ID
 GET http://localhost:8080/tvshows/69bb19a184a8f98b8f717ae4
 
@@ -39,6 +42,9 @@ DELETE http://localhost:8080/movies/69bb184584a8f98b8f717add
 
 ### GET all tvshows
 GET http://localhost:8080/tvshows
+
+### GET all tvshows live
+GET https://cse341-movies.onrender.com/tvshows
 
 ### POST create tvshow
 POST http://localhost:8080/tvshows
