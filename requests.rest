@@ -1,0 +1,74 @@
+### GET all movies
+GET http://localhost:8080/movies
+
+### GET movie by ID
+GET http://localhost:8080/tvshows/69bb19a184a8f98b8f717ae4
+
+### POST create movie
+POST http://localhost:8080/movies
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "genre": "Sci-Fi",
+  "releaseYear": 2010,
+  "director": "Christopher Nolan",
+  "rating": 9,
+  "duration": 148,
+  "language": "English",
+  "synopsis": "A thief who steals corporate secrets through dream-sharing technology is given the task of planting an idea into the mind of a CEO."
+}
+
+### PUT update movie
+PUT http://localhost:8080/movies/69bb184584a8f98b8f717add
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "genre": "Sci-Fi",
+  "releaseYear": 2010,
+  "director": "Christopher Nolan",
+  "rating": 10,
+  "duration": 148,
+  "language": "English",
+  "synopsis": "Updated synopsis here."
+}
+
+### DELETE movie
+DELETE http://localhost:8080/movies/69bb184584a8f98b8f717add
+
+### GET all tvshows
+GET http://localhost:8080/tvshows
+
+### POST create tvshow
+POST http://localhost:8080/tvshows
+Content-Type: application/json
+
+{
+  "title": "Breaking Bad",
+  "genre": "Crime Drama",
+  "seasons": 5,
+  "episodes": 62,
+  "status": "Ended",
+  "network": "AMC",
+  "rating": 10,
+  "language": "English"
+}
+
+### PUT update tvshow
+PUT http://localhost:8080/tvshows/69bb19a184a8f98b8f717ae4
+Content-Type: application/json
+
+{
+  "title": "Breaking Bad",
+  "genre": "Crime Drama",
+  "seasons": 5,
+  "episodes": 62,
+  "status": "Ended",
+  "network": "AMC",
+  "rating": 9,
+  "language": "English"
+}
+
+### DELETE tvshow
+DELETE http://localhost:8080/tvshows/69bb19a184a8f98b8f717ae4
