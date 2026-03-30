@@ -246,6 +246,15 @@
           "401": { "description": "Not logged in" }
         }
       }
+    },
+    "/auth/status": {
+      "get": {
+        "summary": "Check session status (debug)",
+        "tags": ["Auth"],
+        "responses": {
+          "200": { "description": "Returns authenticated state, user info, and session ID" }
+        }
+      }
     }
   },
   "components": {

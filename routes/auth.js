@@ -6,24 +6,25 @@ const router = express.Router();
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Google callback
-router.get('/google/callback', (req, res, next) => {
-  // Guard: if no code param, Google didn't send one — don't re-process
-  if (!req.query.code) {
-    return res.redirect('/');
+router.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    // Explicitly save session to MongoStore before redirecting.
+    // Without this, the redirect can beat the async session save,
+    // causing the next request to have no user (401).
+    req.session.save((err) => {
+      if (err) console.error('Session save error:', err);
+      res.redirect('/api-docs');
+    });
   }
-  passport.authenticate('google', {
-    failureRedirect: '/',
-    failureMessage: true
-  })(req, res, (err) => {
-    if (err) {
-      console.error('OAuth callback error:', err);
-      return res.status(500).json({ error: 'OAuth failed', details: err.message });
-    }
-    // Log failure messages stored in session
-    if (req.session && req.session.messages && req.session.messages.length) {
-      console.error('OAuth failure messages:', req.session.messages);
-    }
-    res.redirect('/api-docs');
+);
+
+// Debug: check if session is alive (hit this after login to verify)
+router.get('/status', (req, res) => {
+  res.json({
+    authenticated: req.isAuthenticated(),
+    user: req.user || null,
+    sessionID: req.sessionID
   });
 });
 
