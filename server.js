@@ -36,7 +36,11 @@ app.use('/tvshows', require('./routes/tvshows'));
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc, {
+  swaggerOptions: {
+    withCredentials: true
+  }
+}));
 
 const PORT = process.env.PORT || 8080;
 
