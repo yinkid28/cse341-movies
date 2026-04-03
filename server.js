@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const session = require('express-session');
 const { MongoStore } = require('connect-mongo');
 const passport = require('passport');
@@ -11,11 +12,21 @@ const app = express();
 
 app.set('trust proxy', 1);
 
+app.use(cors({ origin: true, credentials: true }));
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    dbName: 'cse341-movies'
+  }),
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    maxAge: 24 * 60 * 60 * 1000
+  }
 }));
 
 app.use(passport.initialize());
@@ -28,7 +39,11 @@ app.use('/tvshows', require('./routes/tvshows'));
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc, {
+  swaggerOptions: {
+    withCredentials: true
+  }
+}));
 
 const PORT = process.env.PORT || 8080;
 
@@ -41,11 +56,3 @@ connectDb()
     console.error('MongoDB connection error:', err);
     process.exit(1);
   });
-
-
-const cors = require('cors');
-
-  app.use(cors({
-    origin: ['http://localhost:8080', 'https://cse341-movies-20er.onrender.com'],
-    credentials: true
-  }));
